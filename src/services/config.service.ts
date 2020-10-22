@@ -35,12 +35,12 @@ class ConfigService {
       type: 'postgres',
 
       url: this.getValue('DATABASE_URL'),
-      entities: ['**/*.entity{.ts,.js}'],
+      entities: ['dist/**/*.entity.js'],
       logging: true,
       ssl: true,
       extra: {
         ssl: {
-          rejectUnauthorized: false
+          rejectUnauthorized: false,
         },
       },
     } as TypeOrmModuleOptions;
@@ -50,11 +50,7 @@ class ConfigService {
 
 const configService = new ConfigService(process.env)
   .ensureValues([
-    'POSTGRES_HOST',
-    'POSTGRES_PORT',
-    'POSTGRES_USER',
-    'POSTGRES_PASSWORD',
-    'POSTGRES_DATABASE',
+    'DATABASE_URL',
   ]);
 
 export { configService };
